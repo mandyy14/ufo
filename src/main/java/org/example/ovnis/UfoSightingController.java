@@ -22,22 +22,20 @@ public class UfoSightingController {
     public String index(Model model){
         var sightings = sightingService.getAll();
         model.addAttribute("sightings", sightings);
-        return "sightings/index";
+        return "index";
     }
 
-    // ✅ Adiciona "sighting" no Model para o form
     @GetMapping("/form")
     public String form(Model model){
         model.addAttribute("sighting", new UfoSighting());
-        return "sightings/form";
+        return "form";
     }
 
-    // ✅ Usa o MESMO nome do th:object no POST
     @PostMapping("/form")
     public String save(@ModelAttribute("sighting") UfoSighting sighting,
                        RedirectAttributes redirect){
         sightingService.save(sighting);
-        redirect.addFlashAttribute("message", "UFO(OVNI) cadastrado com sucesso!");
+        redirect.addFlashAttribute("message", "UFO(OVNI) cadastrado com sucesso! MEU DEUSSSSSSSss");
         return "redirect:/sightings";
     }
 }
