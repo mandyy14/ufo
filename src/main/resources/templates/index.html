@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" data-theme="corporate">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UFO Sightings</title>
+
+    <!-- Tailwind + DaisyUI -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" />
+</head>
+<body class="min-h-screen bg-base-200">
+<!-- Navbar -->
+<div class="navbar bg-base-100 shadow">
+    <div class="navbar-start">
+        <a href="/sightings" class="btn btn-ghost text-xl">UFO Sightings</a>
+    </div>
+    <div class="navbar-end">
+        <a class="btn btn-primary" href="/sightings/form">Novo sighting</a>
+    </div>
+</div>
+
+<main class="container mx-auto p-4 md:p-6">
+    <!-- Flash message -->
+    <div th:if="${message}" class="alert alert-success mb-4">
+        <span th:text="${message}">Mensagem</span>
+    </div>
+
+    <!-- Card da tabela -->
+    <div class="card bg-base-100 shadow">
+        <div class="card-body">
+            <h2 class="card-title">Registros</h2>
+
+            <div class="overflow-x-auto">
+                <table class="table table-zebra">
+                    <thead>
+                    <tr>
+                        <th>Location</th>
+                        <th>Date &amp; time</th>
+                        <th>Color</th>
+                        <th>Shape</th>
+                        <th>Quantity</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="s : ${sightings}">
+                        <td th:text="${s.location}">—</td>
+                        <td th:text="${#temporals.format(s.dateTime, 'yyyy-MM-dd HH:mm')}">—</td>
+                        <td th:text="${s.color}">—</td>
+                        <td>
+                            <div class="badge badge-outline" th:text="${s.shape}">DISC</div>
+                        </td>
+                        <td>
+                            <div class="badge" th:text="${s.quantity}">1</div>
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(sightings)}">
+                        <td colspan="5">
+                            <div class="alert alert-info">
+                                <span>Nenhum sighting cadastrado ainda hehe :p</span>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</main>
+</body>
+</html>

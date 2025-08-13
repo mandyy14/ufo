@@ -1,0 +1,69 @@
+<!--/*@thymesVar id="sighting" type="org.example.ovnis.UfoSighting"*/-->
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" data-theme="corporate">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Novo UFO Sighting</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" />
+</head>
+<body class="min-h-screen bg-base-200">
+<div class="navbar bg-base-100 shadow">
+    <div class="navbar-start">
+        <a href="/sightings" class="btn btn-ghost text-xl">UFO Sightings</a>
+    </div>
+</div>
+
+<main class="container mx-auto p-4 md:p-6">
+    <div class="card bg-base-100 shadow max-w-3xl mx-auto">
+        <div class="card-body">
+            <h2 class="card-title">Novo sighting</h2>
+
+
+            <form th:action="@{/sightings/form}" th:object="${sighting}" method="post" class="grid gap-4">
+                <label class="form-control">
+                    <div class="label"><span class="label-text">Location</span></div>
+                    <input th:field="*{location}" class="input input-bordered" placeholder="City, State / Country" required />
+                </label>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <label class="form-control">
+                        <div class="label"><span class="label-text">Date &amp; time</span></div>
+                        <input type="datetime-local" th:field="*{dateTime}" class="input input-bordered" required />
+                    </label>
+
+                    <label class="form-control">
+                        <div class="label"><span class="label-text">Color</span></div>
+                        <input th:field="*{color}" class="input input-bordered" placeholder="ex.: bright green" required />
+                    </label>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <label class="form-control">
+                        <div class="label"><span class="label-text">Shape</span></div>
+                        <select th:field="*{shape}" class="select select-bordered" required>
+                            <option value="" disabled selected>Selecione...</option>
+                            <option value="DISC">DISC</option>
+                            <option value="SPHERE">SPHERE</option>
+                            <option value="TRIANGLE">TRIANGLE</option>
+                            <option value="OTHER">OTHER</option>
+                        </select>
+                    </label>
+
+                    <label class="form-control">
+                        <div class="label"><span class="label-text">Quantity</span></div>
+                        <input type="number" min="1" th:field="*{quantity}" class="input input-bordered" required />
+                    </label>
+                </div>
+
+                <div class="card-actions justify-end mt-2">
+                    <a class="btn btn-ghost" href="/sightings">Cancelar</a>
+                    <button class="btn btn-primary" type="submit">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+</body>
+</html>

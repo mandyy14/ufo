@@ -1,0 +1,9 @@
+services:
+  postgres:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=ufo'
+      - 'POSTGRES_PASSWORD=ufo'
+      - 'POSTGRES_USER=ufo'
+    ports:
+      - '5432:5432'
